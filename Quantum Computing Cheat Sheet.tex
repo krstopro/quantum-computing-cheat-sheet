@@ -38,63 +38,59 @@
 
 \section{Unitary Operators}
 
-\begin{tabular}{r@{=}l}
-\end{tabular}
-
 \begin{alignat*}{3}
-I &= \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} \hspace{95pt}
+I &= \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} \hspace{96pt}
 \begin{aligned}
-I \ket{0} &= \ket{0} \\
-I \ket{1} &= \ket{1}
-\end{aligned} &
+\ket{x} \mapsto \ket{x}
+\end{aligned} &&
 \Qcircuit @C=1em @R=.7em {
 	& \qw & \qw & \qw
 } \\[12pt]
-X &= \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix} \hspace{95pt}
+X &= \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix} \hspace{58pt}
 \begin{aligned}
-X \ket{0} &= \ket{1} \\
-X \ket{1} &= \ket{0}
-\end{aligned} &
+\ket{0} &\mapsto \ket{1} &\quad \ket{+} &\mapsto \ket{+} \\
+\ket{1} &\mapsto \ket{0} &\quad \ket{-} &\mapsto -\ket{-}
+\end{aligned} &&
 \Qcircuit @C=1em @R=.7em {
 	& \gate{X} & \qw
 } \\[12pt]
-Y &= \begin{bmatrix} 0 & -i \\ i & 0 \end{bmatrix} \hspace{88pt}
+Y &= \begin{bmatrix} 0 & -i \\ i & 0 \end{bmatrix} \hspace{48pt}
 \begin{aligned}
-Y \ket{0} &= i\ket{1} \\
-Y \ket{1} &= -i\ket{0}
-\end{aligned} &
+\ket{0} &\mapsto i\ket{1} &\quad \ket{+} &\mapsto -i\ket{-} \\
+\ket{1} &\mapsto -i\ket{0} &\quad \ket{-} &\mapsto i\ket{+}
+\end{aligned} &&
 \Qcircuit @C=1em @R=.7em {
 	& \gate{Y} & \qw
 } \\[12pt]
-Z &= \begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix} \hspace{86pt}
+Z &= \begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix} \hspace{52pt}
 \begin{aligned}
-Z \ket{0} &= \ket{0} \\
-Z \ket{1} &= -\ket{1}
-\end{aligned} &
+\ket{0} &\mapsto \ket{0} &\quad \ket{+} &\mapsto \ket{-} \\
+\ket{1} &\mapsto -\ket{1} &\quad \ket{-} &\mapsto \ket{+}
+\end{aligned} &&
 \Qcircuit @C=1em @R=.7em {
 	& \gate{Z} & \qw
 } \\[12pt]
-H &= \frac{1}{\sqrt{2}} \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix} \hspace{66pt}
+H &= \frac{1}{\sqrt{2}} \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix} \hspace{48pt}
 \begin{aligned}
-H \ket{0} &= \ket{+} \\
-H \ket{1} &= \ket{-}
-\end{aligned} &
+\ket{0} &\mapsto \ket{+} &\quad \ket{+} &\mapsto \ket{0} \\
+\ket{1} &\mapsto \ket{-} &\quad \ket{-} &\mapsto \ket{1}
+\end{aligned} &&
 \Qcircuit @C=1em @R=.7em {
 	& \gate{H} & \qw
 } \\[12pt]
-S &= \begin{bmatrix} 1 & 0 \\ 0 & i \end{bmatrix} \hspace{96pt}
+S &= \begin{bmatrix} 1 & 0 \\ 0 & i \end{bmatrix} \hspace{100pt}
 \begin{aligned}
-S \ket{0} &= \ket{0} \\
-S \ket{1} &= i\ket{1}
-\end{aligned} &
+\ket{0} &\mapsto \ket{0} \\
+\ket{1} &\mapsto i\ket{1}
+\end{aligned} &&
 \Qcircuit @C=1em @R=.7em {
 	& \gate{S} & \qw
 } \\[12pt]
-T &= \begin{bmatrix} 1 & 0 \\ 0 & e^{i \pi / 4} \end{bmatrix} \hspace{80pt}
+T &= \begin{bmatrix} 1 & 0 \\ 0 & e^{i \pi / 4} \end{bmatrix} \hspace{84pt}
 \begin{aligned}
-T \ket{0} &= \ket{0} \\
-T \ket{1} &= e^{i \pi / 4}\ket{1}
-\end{aligned} &
+\ket{0} &\mapsto \ket{0} \\
+\ket{1} &\mapsto e^{i \pi / 4}\ket{1}
+\end{aligned} &&
 \Qcircuit @C=1em @R=.7em {
 	& \gate{T} & \qw
 } \\[12pt]
@@ -102,13 +98,13 @@ T \ket{1} &= e^{i \pi / 4}\ket{1}
                                            0 & 1 & 0 & 0 \\
                                            0 & 0 & 0 & 1 \\
                                            0 & 0 & 1 & 0
-                  \end{bmatrix} \hspace{62pt}
+                  \end{bmatrix} \hspace{28pt}
 \begin{aligned}
-\CNOT \ket{00} &= \ket{00} \\
-\CNOT \ket{01} &= \ket{01} \\
-\CNOT \ket{10} &= \ket{11} \\
-\CNOT \ket{11} &= \ket{10}
-\end{aligned} & \hspace{72pt}
+\ket{00} &\mapsto \ket{00} &\quad \ket{++} &\mapsto \ket{++} \\
+\ket{01} &\mapsto \ket{01} &\quad \ket{+-} &\mapsto \ket{--}\\
+\ket{10} &\mapsto \ket{11} &\quad \ket{-+} &\mapsto \ket{-+}\\
+\ket{11} &\mapsto \ket{10} &\quad \ket{--} &\mapsto \ket{+-}
+\end{aligned} \hspace{36pt} &&
 \Qcircuit @C=1em @R=.7em {
 	& \ctrl{2} & \qw \\
 	& \\
