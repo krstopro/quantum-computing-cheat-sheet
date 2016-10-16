@@ -39,70 +39,70 @@
 \section{Unitary Operators}
 
 \begin{alignat*}{3}
-I &= \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} \hspace{96pt}
+I &= \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} \hspace{36pt} &&
 \begin{aligned}
 \ket{x} \mapsto \ket{x}
-\end{aligned} &&
+\end{aligned} \hspace{36pt} &&
 \Qcircuit @C=1em @R=.7em {
 	& \qw & \qw & \qw
 } \\[12pt]
-X &= \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix} \hspace{58pt}
+X &= \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix} \hspace{36pt} &&
 \begin{aligned}
 \ket{0} &\mapsto \ket{1} &\quad \ket{+} &\mapsto \ket{+} \\
 \ket{1} &\mapsto \ket{0} &\quad \ket{-} &\mapsto -\ket{-}
-\end{aligned} &&
+\end{aligned} \hspace{36pt} &&
 \Qcircuit @C=1em @R=.7em {
 	& \gate{X} & \qw
 } \\[12pt]
-Y &= \begin{bmatrix} 0 & -i \\ i & 0 \end{bmatrix} \hspace{48pt}
+Y &= \begin{bmatrix} 0 & -i \\ i & 0 \end{bmatrix} \hspace{36pt} &&
 \begin{aligned}
 \ket{0} &\mapsto i\ket{1} &\quad \ket{+} &\mapsto -i\ket{-} \\
 \ket{1} &\mapsto -i\ket{0} &\quad \ket{-} &\mapsto i\ket{+}
-\end{aligned} &&
+\end{aligned} \hspace{36pt} &&
 \Qcircuit @C=1em @R=.7em {
 	& \gate{Y} & \qw
 } \\[12pt]
-Z &= \begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix} \hspace{52pt}
+Z &= \begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix} \hspace{36pt} &&
 \begin{aligned}
 \ket{0} &\mapsto \ket{0} &\quad \ket{+} &\mapsto \ket{-} \\
 \ket{1} &\mapsto -\ket{1} &\quad \ket{-} &\mapsto \ket{+}
-\end{aligned} &&
+\end{aligned} \hspace{36pt} &&
 \Qcircuit @C=1em @R=.7em {
 	& \gate{Z} & \qw
 } \\[12pt]
-H &= \frac{1}{\sqrt{2}} \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix} \hspace{48pt}
+H &= \frac{1}{\sqrt{2}} \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix} \hspace{36pt} &&
 \begin{aligned}
 \ket{0} &\mapsto \ket{+} &\quad \ket{+} &\mapsto \ket{0} \\
 \ket{1} &\mapsto \ket{-} &\quad \ket{-} &\mapsto \ket{1}
-\end{aligned} &&
+\end{aligned} \hspace{36pt} &&
 \Qcircuit @C=1em @R=.7em {
 	& \gate{H} & \qw
 } \\[12pt]
-S &= \begin{bmatrix} 1 & 0 \\ 0 & i \end{bmatrix} \hspace{100pt}
+S &= \begin{bmatrix} 1 & 0 \\ 0 & i \end{bmatrix} \hspace{36pt} &&
 \begin{aligned}
 \ket{0} &\mapsto \ket{0} \\
 \ket{1} &\mapsto i\ket{1}
-\end{aligned} &&
+\end{aligned} \hspace{36pt} &&
 \Qcircuit @C=1em @R=.7em {
 	& \gate{S} & \qw
 } \\[12pt]
-T &= \begin{bmatrix} 1 & 0 \\ 0 & e^{i \pi / 4} \end{bmatrix} \hspace{84pt}
+T &= \begin{bmatrix} 1 & 0 \\ 0 & e^{i \pi / 4} \end{bmatrix} \hspace{36pt} &&
 \begin{aligned}
 \ket{0} &\mapsto \ket{0} \\
 \ket{1} &\mapsto e^{i \pi / 4}\ket{1}
-\end{aligned} &&
+\end{aligned} \hspace{36pt} &&
 \Qcircuit @C=1em @R=.7em {
 	& \gate{T} & \qw
 } \\[12pt]
 \CNOT &= \begin{bmatrix} 1 & 0 & 0 & 0 \\ 
-                                           0 & 1 & 0 & 0 \\
-                                           0 & 0 & 0 & 1 \\
+                                           0 & 1 & 0 & 0 \\ 
+                                           0 & 0 & 0 & 1 \\ 
                                            0 & 0 & 1 & 0
-                  \end{bmatrix} \hspace{28pt}
+                  \end{bmatrix} \hspace{36pt} &&
 \begin{aligned}
 \ket{00} &\mapsto \ket{00} &\quad \ket{++} &\mapsto \ket{++} \\
-\ket{01} &\mapsto \ket{01} &\quad \ket{+-} &\mapsto \ket{--}\\
-\ket{10} &\mapsto \ket{11} &\quad \ket{-+} &\mapsto \ket{-+}\\
+\ket{01} &\mapsto \ket{01} &\quad \ket{+-} &\mapsto \ket{--} \\
+\ket{10} &\mapsto \ket{11} &\quad \ket{-+} &\mapsto \ket{-+} \\
 \ket{11} &\mapsto \ket{10} &\quad \ket{--} &\mapsto \ket{+-}
 \end{aligned} \hspace{36pt} &&
 \Qcircuit @C=1em @R=.7em {
@@ -119,22 +119,24 @@ X^2 = Y^2 = Z^2 = H^2 = I
 \end{align*}
 
 \begin{equation*}
-T^2 = S \quad S^2 = Z
+T^2 = S \qquad S^2 = Z
 \end{equation*}
 
-\begin{align*}
-XY = iZ \quad YX = -iZ \quad XZ = -iY \quad ZX = iY \quad YZ = -iZ \quad ZY = -iX
-\end{align*}
+\begin{alignat*}{3}
+& XY = iZ \qquad && YX = -iZ \qquad && ZX = iY \\
+& XZ = -iY \qquad && YZ = -iZ \qquad && ZY = -iX
+\end{alignat*}
 
-\begin{align*}
-HX = ZH \quad HZ = XH \\
-SX = XZS \quad SZ = ZS
-\end{align*}
+\begin{alignat*}{2}
+& HX = ZH \qquad && SX = XZS \\
+& HZ = XH \qquad && SZ = ZS
+\end{alignat*}
 
-\begin{align*}
-HXH = Z \quad HYH = -Y \quad HZH \\
-SXS = Y \quad SYS = X \quad SZS = Z
-\end{align*}
+\begin{alignat*}{2}
+& HXH = Z \qquad && SXS^\dagger = Y \\
+& HYH = -Y \qquad && SYS^\dagger = X \\
+& HZH = X \qquad && SZS^\dagger = Z
+\end{alignat*}
 
 \begin{equation*}
 \Qcircuit @C=1em @R=.7em {
