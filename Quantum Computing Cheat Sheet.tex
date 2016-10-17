@@ -102,7 +102,7 @@ T &= \begin{bmatrix} 1 & 0 \\ 0 & e^{i \pi / 4} \end{bmatrix} \hspace{36pt} &&
 \Qcircuit @C=1em @R=.7em {
 	& \gate{T} & \qw
 } \\[12pt]
-\CNOT &= \begin{bmatrix} 1 & 0 & 0 & 0 \\ 
+\CNOT_{0,1} &= \begin{bmatrix} 1 & 0 & 0 & 0 \\ 
                                            0 & 1 & 0 & 0 \\ 
                                            0 & 0 & 0 & 1 \\ 
                                            0 & 0 & 1 & 0
@@ -118,7 +118,25 @@ T &= \begin{bmatrix} 1 & 0 \\ 0 & e^{i \pi / 4} \end{bmatrix} \hspace{36pt} &&
 	& \\
 	& \targ & \qw
 }
-\end{alignat*} \\
+\end{alignat*} \\[12pt]
+\CNOT_{1,0} &= \begin{bmatrix} 1 & 0 & 0 & 0 \\ 
+                                           0 & 0 & 0 & 1 \\ 
+                                           0 & 0 & 1 & 0 \\ 
+                                           0 & 1 & 0 & 0
+                  \end{bmatrix} \hspace{36pt} &&
+\begin{aligned}
+\ket{00} &\mapsto \ket{00} &\quad \ket{++} &\mapsto \ket{++} \\
+\ket{01} &\mapsto \ket{11} &\quad \ket{+-} &\mapsto \ket{+-} \\
+\ket{10} &\mapsto \ket{10} &\quad \ket{-+} &\mapsto \ket{--} \\
+\ket{11} &\mapsto \ket{01} &\quad \ket{--} &\mapsto \ket{-+}
+\end{aligned} \hspace{36pt} &&
+\Qcircuit @C=1em @R=.7em {
+	& \targ & \qw \\
+	& \\
+	& \ctrl{-2} & \qw
+}
+\end{alignat*}
+
 
 \section{Operator identities}
 
