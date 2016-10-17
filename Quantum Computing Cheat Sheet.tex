@@ -78,6 +78,14 @@ H &= \frac{1}{\sqrt{2}} \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix} \hspace{36
 \Qcircuit @C=1em @R=.7em {
 	& \gate{H} & \qw
 } \\[12pt]
+R_\theta &= \begin{bmatrix} 1 & 0 \\ 0 & e^{i \theta} \end{bmatrix} \hspace{36pt} &&
+\begin{aligned}
+\ket{0} &\mapsto \ket{0} \\
+\ket{1} &\mapsto e^{i \theta}\ket{1}
+\end{aligned} \hspace{36pt} &&
+\Qcircuit @C=1em @R=.7em {
+	& \gate{R_\theta} & \qw
+} \\[12pt]
 S &= \begin{bmatrix} 1 & 0 \\ 0 & i \end{bmatrix} \hspace{36pt} &&
 \begin{aligned}
 \ket{0} &\mapsto \ket{0} \\
@@ -124,7 +132,7 @@ T^2 = S \qquad S^2 = Z
 
 \begin{alignat*}{3}
 & XY = iZ \qquad && YX = -iZ \qquad && ZX = iY \\
-& XZ = -iY \qquad && YZ = -iZ \qquad && ZY = -iX
+& XZ = -iY \qquad && YZ = iX \qquad && ZY = -iX
 \end{alignat*}
 
 \begin{alignat*}{2}
@@ -134,7 +142,7 @@ T^2 = S \qquad S^2 = Z
 
 \begin{alignat*}{2}
 & HXH = Z \qquad && SXS^\dagger = Y \\
-& HYH = -Y \qquad && SYS^\dagger = X \\
+& HYH = -Y \qquad && SYS^\dagger = -X \\
 & HZH = X \qquad && SZS^\dagger = Z
 \end{alignat*}
 
@@ -152,49 +160,49 @@ T^2 = S \qquad S^2 = Z
 
 \begin{equation*}
 \Qcircuit @C=1em @R=.7em {
-	& \ctrl{2} & \gate{X} & \qw & & & \gate{X} & \ctrl{2} & \qw  \\
+	& \gate{X} & \ctrl{2} & \qw & & & \ctrl{2} & \gate{X} & \qw  \\
 	& & & & \push{\rule{.12em}{0em}=\rule{.12em}{0em}} 
 	& & & & & & &
 	\push{\rule{0.12em}{0em}
-	\CNOT_{0,1}(X \otimes I) = (X \otimes X) \CNOT_{0,1}
+	(X \otimes I) \CNOT_{0,1} = \CNOT_{0,1} (X \otimes X)
 	} \\
-	& \targ & \qw & \qw & & & \gate{X} & \targ & \qw
+	& \qw & \targ & \qw & & & \targ & \gate{X} & \qw
 }
 \end{equation*} \\
 
 \begin{equation*}
 \Qcircuit @C=1em @R=.7em {
-	& \ctrl{2} & \qw & \qw & & & \qw & \ctrl{2} & \qw  \\
+	& \qw & \ctrl{2} & \qw & & & \ctrl{2} & \qw & \qw  \\
 	& & & & \push{\rule{.12em}{0em}=\rule{.12em}{0em}} 
 	& & & & & & &
 	\push{\rule{0.12em}{0em}
-	\CNOT_{0,1}(I \otimes X) = (I \otimes X) \CNOT_{0,1}
+	(I \otimes X) \CNOT_{0,1} = \CNOT_{0,1}(I \otimes X)
 	} \\
-	& \targ & \gate{X} & \qw & & & \gate{X} & \targ & \qw
+	& \gate{X} & \targ & \qw & & & \targ & \gate{X} & \qw
 }
 \end{equation*} \\
 
 \begin{equation*}
 \Qcircuit @C=1em @R=.7em {
-	& \ctrl{2} & \gate{Z} & \qw & & & \gate{Z} & \ctrl{2} & \qw  \\
+	& \gate{Z} & \ctrl{2} & \qw & & & \ctrl{2} & \gate{Z} & \qw  \\
 	& & & & \push{\rule{.12em}{0em}=\rule{.12em}{0em}} 
 	& & & & & & &
 	\push{\rule{0.12em}{0em}
-	\CNOT_{0,1}(Z \otimes I) = (Z \otimes I) \CNOT_{0,1}
+	(Z \otimes I) \CNOT_{0,1} = \CNOT_{0,1} (Z \otimes I)
 	} \\
-	& \targ & \qw & \qw & & & \qw & \targ & \qw
+	& \qw & \targ & \qw & & & \targ & \qw & \qw
 }
 \end{equation*} \\
 
 \begin{equation*}
 \Qcircuit @C=1em @R=.7em {
-	& \ctrl{2} & \qw & \qw & & & \gate{Z} & \ctrl{2} & \qw  \\
+	& \qw & \ctrl{2} & \qw & & & \ctrl{2} & \gate{Z} & \qw  \\
 	& & & & \push{\rule{.12em}{0em}=\rule{.12em}{0em}} 
 	& & & & & & &
 	\push{\rule{0.12em}{0em}
-	\CNOT_{0,1}(I \otimes Z) = (Z \otimes Z) \CNOT_{0,1}
+	(I \otimes Z) \CNOT_{0,1} = \CNOT_{0,1} (Z \otimes Z)
 	} \\
-	& \targ & \gate{Z} & \qw & & & \gate{Z} & \targ & \qw
+	& \gate{Z} & \targ & \qw & & & \targ & \gate{Z} & \qw
 }
 \end{equation*} \\
 
