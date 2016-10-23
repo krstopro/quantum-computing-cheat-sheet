@@ -1,0 +1,5 @@
+TODO list:
+
+- Align circuit identities
+- Add more gate (CSWAP) and identities
+- Add a section on density operators
