@@ -8,6 +8,7 @@
 
 \newcommand{\CNOT}{\text{CNOT}}
 \newcommand{\SWAP}{\text{SWAP}}
+\newcommand{\CSWAP}{\text{CSWAP}}
 \newcommand{\TOFFOLI}{\text{TOFFOLI}}
 
 \IEEEeqnarraydefcolsep{0}{\leftmargini}
@@ -157,6 +158,30 @@ T & = & \begin{bmatrix} 1 & 0 \\ 0 & e^{i \pi / 4} \end{bmatrix} & \hspace{36pt}
 	%& \qwx \\
 	& \qswap \qwx & \qw
 } \end{array} \\[12pt]
+\CSWAP & = & \begin{bmatrix} 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 
+                                                  0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\ 
+                                                  0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\ 
+                                                  0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\
+                                                  0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+                                                  0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+                                                  0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+                                                  0 & 0 & 0 & 0 & 0 & 0 & 0 & 1
+                         \end{bmatrix} & \hspace{36pt} &
+\begin{aligned}
+\ket{000} &\mapsto \ket{000} \\
+\ket{001} &\mapsto \ket{001} \\
+\ket{010} &\mapsto \ket{010} \\
+\ket{011} &\mapsto \ket{011} \\
+\ket{100} &\mapsto \ket{100} \\
+\ket{101} &\mapsto \ket{110} \\
+\ket{110} &\mapsto \ket{101} \\
+\ket{111} &\mapsto \ket{111} 
+\end{aligned} & \hspace{36pt} &
+\begin{array}{c} \Qcircuit @C=1em @R=1.6em {
+	& \ctrl{2} & \qw \\
+	& \qswap & \qw \\
+	& \qswap & \qw
+} \end{array} \\[12pt]
 \TOFFOLI & = & \begin{bmatrix} 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 
                                                     0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\ 
                                                     0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\ 
@@ -176,7 +201,7 @@ T & = & \begin{bmatrix} 1 & 0 \\ 0 & e^{i \pi / 4} \end{bmatrix} & \hspace{36pt}
 \ket{110} &\mapsto \ket{111} \\
 \ket{111} &\mapsto \ket{110} 
 \end{aligned} & \hspace{36pt} &
-\begin{array}{c} \Qcircuit @C=1em @R=1.2em {
+\begin{array}{c} \Qcircuit @C=1em @R=1.6em {
 	& \ctrl{1} & \qw \\
 	& \ctrl{1} & \qw \\
 	& \targ & \qw
@@ -210,76 +235,43 @@ T^2 = S \qquad S^2 = Z
 & HZH = X \qquad && SZS^\dagger = Z
 \end{alignat*}
 
-\begin{equation*}
-\Qcircuit @C=1em @R=.7em {
+\begin{IEEEeqnarray*}{CCC}
+\begin{array}{c} \Qcircuit @C=1em @R=.7em {
 	& \gate{H} & \ctrl{2} & \gate{H} & \qw & & & \targ & \qw \\
-	& & & & & \push{\rule{.12em}{0em}=\rule{.12em}{0em}} 
-	& & & & & &
-	\push{\rule{0.12em}{0em}
-	(H \otimes H) \CNOT_{0,1} (H \otimes H) = \CNOT_{1,0}
-	} \\
+	& & & & & \push{\rule{.12em}{0em}=\rule{.12em}{0em}} \\
 	& \gate{H} & \targ & \gate{H} & \qw & & & \ctrl{-2} & \qw
-}
-\end{equation*} \\
-
-\begin{equation*}
-\Qcircuit @C=1em @R=.7em {
+} \end{array} & \hspace{36pt} &
+(H \otimes H) \CNOT_{0,1} (H \otimes H) = \CNOT_{1,0} \\[24pt]
+\begin{array}{c} \Qcircuit @C=1em @R=.7em {
 	& \gate{X} & \ctrl{2} & \qw & & & \ctrl{2} & \gate{X} & \qw  \\
-	& & & & \push{\rule{.12em}{0em}=\rule{.12em}{0em}} 
-	& & & & & & &
-	\push{\rule{0.12em}{0em}
-	(X \otimes I) \CNOT_{0,1} = \CNOT_{0,1} (X \otimes X)
-	} \\
+	& & & & \push{\rule{.12em}{0em}=\rule{.12em}{0em}} \\
 	& \qw & \targ & \qw & & & \targ & \gate{X} & \qw
-}
-\end{equation*} \\
-
-\begin{equation*}
-\Qcircuit @C=1em @R=.7em {
+} \end{array} & \hspace{36pt} &
+(X \otimes I) \CNOT_{0,1} = \CNOT_{0,1} (X \otimes X) \\[24pt]
+\begin{array}{c} \Qcircuit @C=1em @R=.7em {
 	& \qw & \ctrl{2} & \qw & & & \ctrl{2} & \qw & \qw  \\
-	& & & & \push{\rule{.12em}{0em}=\rule{.12em}{0em}} 
-	& & & & & & &
-	\push{\rule{0.12em}{0em}
-	(I \otimes X) \CNOT_{0,1} = \CNOT_{0,1}(I \otimes X)
-	} \\
+	& & & & \push{\rule{.12em}{0em}=\rule{.12em}{0em}} \\
 	& \gate{X} & \targ & \qw & & & \targ & \gate{X} & \qw
-}
-\end{equation*} \\
-
-\begin{equation*}
-\Qcircuit @C=1em @R=.7em {
+} \end{array} & \hspace{36pt} &
+(I \otimes X) \CNOT_{0,1} = \CNOT_{0,1}(I \otimes X) \\[24pt]
+\begin{array}{c} \Qcircuit @C=1em @R=.7em {
 	& \gate{Z} & \ctrl{2} & \qw & & & \ctrl{2} & \gate{Z} & \qw  \\
-	& & & & \push{\rule{.12em}{0em}=\rule{.12em}{0em}} 
-	& & & & & & &
-	\push{\rule{0.12em}{0em}
-	(Z \otimes I) \CNOT_{0,1} = \CNOT_{0,1} (Z \otimes I)
-	} \\
+	& & & & \push{\rule{.12em}{0em}=\rule{.12em}{0em}} \\
 	& \qw & \targ & \qw & & & \targ & \qw & \qw
-}
-\end{equation*} \\
-
-\begin{equation*}
-\Qcircuit @C=1em @R=.7em {
+} \end{array} & \hspace{36pt} &
+(Z \otimes I) \CNOT_{0,1} = \CNOT_{0,1} (Z \otimes I) \\[24pt]
+\begin{array}{c} \Qcircuit @C=1em @R=.7em {
 	& \qw & \ctrl{2} & \qw & & & \ctrl{2} & \gate{Z} & \qw  \\
-	& & & & \push{\rule{.12em}{0em}=\rule{.12em}{0em}} 
-	& & & & & & &
-	\push{\rule{0.12em}{0em}
-	(I \otimes Z) \CNOT_{0,1} = \CNOT_{0,1} (Z \otimes Z)
-	} \\
+	& & & & \push{\rule{.12em}{0em}=\rule{.12em}{0em}} \\
 	& \gate{Z} & \targ & \qw & & & \targ & \gate{Z} & \qw
-}
-\end{equation*} \\
-
-\begin{equation*}
-\Qcircuit @C=1em @R=.7em {
+} \end{array} & \hspace{36pt} &
+(I \otimes Z) \CNOT_{0,1} = \CNOT_{0,1} (Z \otimes Z) \\[24pt]
+\begin{array}{c} \Qcircuit @C=1em @R=.7em {
 	& \qswap & \qw & & & \ctrl{2} & \targ & \ctrl{2} & \qw  \\
-	& \qwx & & \push{\rule{.12em}{0em}=\rule{.12em}{0em}} 
-	& & & & & & & & & &
-	\push{\rule{0.12em}{0em}
-	\SWAP = \CNOT_{0,1} \CNOT_{1,0} \CNOT_{0,1}
-	} \\
+	& \qwx & & \push{\rule{.12em}{0em}=\rule{.12em}{0em}} \\
 	& \qswap \qwx & \qw & & & \targ & \ctrl{-2} & \targ & \qw
-}
-\end{equation*} \\
+} \end{array} & \hspace{36pt} &
+\SWAP = \CNOT_{0,1} \CNOT_{1,0} \CNOT_{0,1} \\[24pt]
+\end{IEEEeqnarray*}
 
 \end{document}
