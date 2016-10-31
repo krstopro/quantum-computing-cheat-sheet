@@ -1,10 +1,10 @@
 \documentclass[12pt]{article}
 
-\usepackage[a4paper, total={480pt, 720pt}]{geometry}
+\usepackage[a4paper, top=1.2cm, bottom=2.4cm, left=2.4cm, right=2.4cm]{geometry}
 \usepackage{amsmath}
 \input{Qcircuit}
 \usepackage{IEEEtrantools}
-\allowdisplaybreaks
+\allowdisplaybreaks[1]
 
 \newcommand{\CNOT}{\text{CNOT}}
 \newcommand{\SWAP}{\text{SWAP}}
@@ -13,7 +13,7 @@
 
 \IEEEeqnarraydefcolsep{0}{\leftmargini}
 
-\title{Quantum Computing Cheat Sheet}
+\title{\vspace{-1.2cm}Quantum Computing Cheat Sheet}
 \date{}
 
 \begin{document}
@@ -21,12 +21,19 @@
 
 \maketitle
 
+\vspace{-36pt}
 \section{States}
 
 \begin{equation*}
 \ket{0} = \begin{bmatrix} 1 \\ 0 \end{bmatrix}
 \quad
 \ket{1} = \begin{bmatrix} 0 \\ 1 \end{bmatrix}
+\end{equation*}
+
+\begin{equation*}
+\ket{\psi} = \alpha \ket{0} + \beta \ket{1} = \begin{bmatrix} \alpha \\ \beta \end{bmatrix} ,
+\quad
+|\alpha|^2 + |\beta|^2 = 1
 \end{equation*}
 
 \begin{equation*}
@@ -38,10 +45,10 @@
 \end{equation*}
 
 \begin{equation*}
-\ket{\psi} = \alpha \ket{0} + \beta \ket{1} = \begin{bmatrix} \alpha \\ \beta \end{bmatrix} ,
+\ket{\Phi^\pm} = \frac{1}{\sqrt{2}} \big( \ket{00} \pm \ket{11} \big)
 \quad
-|\alpha|^2 + |\beta|^2 = 1
-\end{equation*} \\
+\ket{\Psi^\pm} = \frac{1}{\sqrt{2}} \big( \ket{01} \pm \ket{10} \big)
+\end{equation*}
 
 \section{Unitary Operators}
 
@@ -206,7 +213,7 @@ T & = & \begin{bmatrix} 1 & 0 \\ 0 & e^{i \pi / 4} \end{bmatrix} & \hspace{36pt}
 	& \ctrl{1} & \qw \\
 	& \targ & \qw
 } \end{array} 
-\end{IEEEeqnarray*} \\
+\end{IEEEeqnarray*} 
 
 
 \section{Operator identities}
