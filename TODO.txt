@@ -1,0 +1,4 @@
+TODO list:
+
+- Add more circuit identities
+- Add a section on density operators

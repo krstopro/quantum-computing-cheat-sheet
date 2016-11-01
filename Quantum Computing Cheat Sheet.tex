@@ -1,12 +1,19 @@
-\documentclass[12pt,a4paper]{article}
+\documentclass[12pt]{article}
 
+\usepackage[a4paper, top=1.2cm, bottom=2.4cm, left=2.4cm, right=2.4cm]{geometry}
 \usepackage{amsmath}
 \input{Qcircuit}
-\allowdisplaybreaks
+\usepackage{IEEEtrantools}
+\allowdisplaybreaks[1]
 
 \newcommand{\CNOT}{\text{CNOT}}
+\newcommand{\SWAP}{\text{SWAP}}
+\newcommand{\CSWAP}{\text{CSWAP}}
+\newcommand{\TOFFOLI}{\text{TOFFOLI}}
 
-\title{Quantum Computing Cheat Sheet}
+\IEEEeqnarraydefcolsep{0}{\leftmargini}
+
+\title{\vspace{-1.2cm}Quantum Computing Cheat Sheet}
 \date{}
 
 \begin{document}
@@ -14,12 +21,19 @@
 
 \maketitle
 
+\vspace{-36pt}
 \section{States}
 
 \begin{equation*}
 \ket{0} = \begin{bmatrix} 1 \\ 0 \end{bmatrix}
 \quad
 \ket{1} = \begin{bmatrix} 0 \\ 1 \end{bmatrix}
+\end{equation*}
+
+\begin{equation*}
+\ket{\psi} = \alpha \ket{0} + \beta \ket{1} = \begin{bmatrix} \alpha \\ \beta \end{bmatrix} ,
+\quad
+|\alpha|^2 + |\beta|^2 = 1
 \end{equation*}
 
 \begin{equation*}
@@ -31,111 +45,175 @@
 \end{equation*}
 
 \begin{equation*}
-\ket{\psi} = \alpha \ket{0} + \beta \ket{1} = \begin{bmatrix} \alpha \\ \beta \end{bmatrix} ,
+\ket{\Phi^\pm} = \frac{1}{\sqrt{2}} \big( \ket{00} \pm \ket{11} \big)
 \quad
-|\alpha|^2 + |\beta|^2 = 1
-\end{equation*} \\
+\ket{\Psi^\pm} = \frac{1}{\sqrt{2}} \big( \ket{01} \pm \ket{10} \big)
+\end{equation*}
 
 \section{Unitary Operators}
 
-\begin{alignat*}{3}
-I &= \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} \hspace{36pt} &&
+\begin{IEEEeqnarray*}{rCllCCC}
+I & = & \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} & \hspace{36pt} &
 \begin{aligned}
-\ket{x} \mapsto \ket{x}
-\end{aligned} \hspace{36pt} &&
+\ket{0} &\mapsto \ket{0} &\quad \ket{+} &\mapsto \ket{+} \\
+\ket{1} &\mapsto \ket{1} &\quad \ket{-} &\mapsto \ket{-}
+\end{aligned} & \hspace{36pt} &
 \Qcircuit @C=1em @R=.7em {
 	& \qw & \qw & \qw
 } \\[12pt]
-X &= \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix} \hspace{36pt} &&
+X & = & \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix} & \hspace{36pt} &
 \begin{aligned}
 \ket{0} &\mapsto \ket{1} &\quad \ket{+} &\mapsto \ket{+} \\
 \ket{1} &\mapsto \ket{0} &\quad \ket{-} &\mapsto -\ket{-}
-\end{aligned} \hspace{36pt} &&
+\end{aligned} & \hspace{36pt} &
 \Qcircuit @C=1em @R=.7em {
 	& \gate{X} & \qw
 } \\[12pt]
-Y &= \begin{bmatrix} 0 & -i \\ i & 0 \end{bmatrix} \hspace{36pt} &&
+Y & = & \begin{bmatrix} 0 & -i \\ i & 0 \end{bmatrix} & \hspace{36pt} &
 \begin{aligned}
 \ket{0} &\mapsto i\ket{1} &\quad \ket{+} &\mapsto -i\ket{-} \\
 \ket{1} &\mapsto -i\ket{0} &\quad \ket{-} &\mapsto i\ket{+}
-\end{aligned} \hspace{36pt} &&
+\end{aligned} & \hspace{36pt} &
 \Qcircuit @C=1em @R=.7em {
 	& \gate{Y} & \qw
 } \\[12pt]
-Z &= \begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix} \hspace{36pt} &&
+Z & = & \begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix} & \hspace{36pt} &
 \begin{aligned}
 \ket{0} &\mapsto \ket{0} &\quad \ket{+} &\mapsto \ket{-} \\
 \ket{1} &\mapsto -\ket{1} &\quad \ket{-} &\mapsto \ket{+}
-\end{aligned} \hspace{36pt} &&
+\end{aligned} & \hspace{36pt} &
 \Qcircuit @C=1em @R=.7em {
 	& \gate{Z} & \qw
 } \\[12pt]
-H &= \frac{1}{\sqrt{2}} \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix} \hspace{36pt} &&
+H & = & \frac{1}{\sqrt{2}} \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix} & \hspace{36pt} &
 \begin{aligned}
 \ket{0} &\mapsto \ket{+} &\quad \ket{+} &\mapsto \ket{0} \\
 \ket{1} &\mapsto \ket{-} &\quad \ket{-} &\mapsto \ket{1}
-\end{aligned} \hspace{36pt} &&
+\end{aligned} & \hspace{36pt} &
 \Qcircuit @C=1em @R=.7em {
 	& \gate{H} & \qw
 } \\[12pt]
-R_\theta &= \begin{bmatrix} 1 & 0 \\ 0 & e^{i \theta} \end{bmatrix} \hspace{36pt} &&
+R_\theta & = & \begin{bmatrix} 1 & 0 \\ 0 & e^{i \theta} \end{bmatrix} & \hspace{36pt} &
 \begin{aligned}
 \ket{0} &\mapsto \ket{0} \\
 \ket{1} &\mapsto e^{i \theta}\ket{1}
-\end{aligned} \hspace{36pt} &&
+\end{aligned} & \hspace{36pt} &
 \Qcircuit @C=1em @R=.7em {
 	& \gate{R_\theta} & \qw
 } \\[12pt]
-S &= \begin{bmatrix} 1 & 0 \\ 0 & i \end{bmatrix} \hspace{36pt} &&
+S & = & \begin{bmatrix} 1 & 0 \\ 0 & i \end{bmatrix} & \hspace{36pt} &
 \begin{aligned}
 \ket{0} &\mapsto \ket{0} \\
 \ket{1} &\mapsto i\ket{1}
-\end{aligned} \hspace{36pt} &&
+\end{aligned} & \hspace{36pt} &
 \Qcircuit @C=1em @R=.7em {
 	& \gate{S} & \qw
 } \\[12pt]
-T &= \begin{bmatrix} 1 & 0 \\ 0 & e^{i \pi / 4} \end{bmatrix} \hspace{36pt} &&
+T & = & \begin{bmatrix} 1 & 0 \\ 0 & e^{i \pi / 4} \end{bmatrix} & \hspace{36pt} &
 \begin{aligned}
 \ket{0} &\mapsto \ket{0} \\
 \ket{1} &\mapsto e^{i \pi / 4}\ket{1}
-\end{aligned} \hspace{36pt} &&
+\end{aligned} & \hspace{36pt} &
 \Qcircuit @C=1em @R=.7em {
 	& \gate{T} & \qw
 } \\[12pt]
-\CNOT_{0,1} &= \begin{bmatrix} 1 & 0 & 0 & 0 \\ 
-                                           0 & 1 & 0 & 0 \\ 
-                                           0 & 0 & 0 & 1 \\ 
-                                           0 & 0 & 1 & 0
-                  \end{bmatrix} \hspace{36pt} &&
+\CNOT_{0,1} & = & \begin{bmatrix} 1 & 0 & 0 & 0 \\ 
+                                         		      0 & 1 & 0 & 0 \\ 
+                                          		      0 & 0 & 0 & 1 \\ 
+                                           	      0 & 0 & 1 & 0
+                  \end{bmatrix} & \hspace{36pt} &
 \begin{aligned}
 \ket{00} &\mapsto \ket{00} &\quad \ket{++} &\mapsto \ket{++} \\
 \ket{01} &\mapsto \ket{01} &\quad \ket{+-} &\mapsto \ket{--} \\
 \ket{10} &\mapsto \ket{11} &\quad \ket{-+} &\mapsto \ket{-+} \\
 \ket{11} &\mapsto \ket{10} &\quad \ket{--} &\mapsto \ket{+-}
-\end{aligned} \hspace{36pt} &&
-\Qcircuit @C=1em @R=.7em {
+\end{aligned} & \hspace{36pt} &
+\begin{array}{c} \Qcircuit @C=1em @R=.7em {
 	& \ctrl{2} & \qw \\
 	& \\
 	& \targ & \qw
-}
-\end{alignat*} \\[12pt]
-\CNOT_{1,0} &= \begin{bmatrix} 1 & 0 & 0 & 0 \\ 
-                                           0 & 0 & 0 & 1 \\ 
-                                           0 & 0 & 1 & 0 \\ 
-                                           0 & 1 & 0 & 0
-                  \end{bmatrix} \hspace{36pt} &&
+} \end{array} \\[12pt]
+\CNOT_{1,0} & = & \begin{bmatrix} 1 & 0 & 0 & 0 \\ 
+                                       	              0 & 0 & 0 & 1 \\ 
+                                    	              0 & 0 & 1 & 0 \\ 
+                                 		              0 & 1 & 0 & 0
+                  \end{bmatrix} & \hspace{36pt} &
 \begin{aligned}
 \ket{00} &\mapsto \ket{00} &\quad \ket{++} &\mapsto \ket{++} \\
 \ket{01} &\mapsto \ket{11} &\quad \ket{+-} &\mapsto \ket{+-} \\
 \ket{10} &\mapsto \ket{10} &\quad \ket{-+} &\mapsto \ket{--} \\
 \ket{11} &\mapsto \ket{01} &\quad \ket{--} &\mapsto \ket{-+}
-\end{aligned} \hspace{36pt} &&
-\Qcircuit @C=1em @R=.7em {
+\end{aligned} & \hspace{36pt} &
+\begin{array}{c} \Qcircuit @C=1em @R=.7em {
 	& \targ & \qw \\
 	& \\
 	& \ctrl{-2} & \qw
-}
-\end{alignat*}
+} \end{array} \\[12pt]
+\SWAP & = & \begin{bmatrix} 1 & 0 & 0 & 0 \\ 
+                                               0 & 0 & 1 & 0 \\ 
+                                               0 & 1 & 0 & 0 \\ 
+                                               0 & 0 & 0 & 1
+                  \end{bmatrix} & \hspace{36pt} &
+\begin{aligned}
+\ket{00} &\mapsto \ket{00} &\quad \ket{++} &\mapsto \ket{++} \\
+\ket{01} &\mapsto \ket{10} &\quad \ket{+-} &\mapsto \ket{-+} \\
+\ket{10} &\mapsto \ket{01} &\quad \ket{-+} &\mapsto \ket{+-} \\
+\ket{11} &\mapsto \ket{11} &\quad \ket{--} &\mapsto \ket{--}
+\end{aligned} & \hspace{36pt} &
+\begin{array}{c} \Qcircuit @C=1.36em @R=2em {
+	& \qswap & \qw \\
+	%& \qwx \\
+	& \qswap \qwx & \qw
+} \end{array} \\[12pt]
+\CSWAP & = & \begin{bmatrix} 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 
+                                                  0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\ 
+                                                  0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\ 
+                                                  0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\
+                                                  0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+                                                  0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+                                                  0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+                                                  0 & 0 & 0 & 0 & 0 & 0 & 0 & 1
+                         \end{bmatrix} & \hspace{36pt} &
+\begin{aligned}
+\ket{000} &\mapsto \ket{000} \\
+\ket{001} &\mapsto \ket{001} \\
+\ket{010} &\mapsto \ket{010} \\
+\ket{011} &\mapsto \ket{011} \\
+\ket{100} &\mapsto \ket{100} \\
+\ket{101} &\mapsto \ket{110} \\
+\ket{110} &\mapsto \ket{101} \\
+\ket{111} &\mapsto \ket{111} 
+\end{aligned} & \hspace{36pt} &
+\begin{array}{c} \Qcircuit @C=1em @R=1.6em {
+	& \ctrl{2} & \qw \\
+	& \qswap & \qw \\
+	& \qswap & \qw
+} \end{array} \\[12pt]
+\TOFFOLI & = & \begin{bmatrix} 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 
+                                                    0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\ 
+                                                    0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\ 
+                                                    0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\
+                                                    0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+                                                    0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+                                                    0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+                                                    0 & 0 & 0 & 0 & 0 & 0 & 1 & 0
+                  \end{bmatrix} & \hspace{36pt} &
+\begin{aligned}
+\ket{000} &\mapsto \ket{000} \\
+\ket{001} &\mapsto \ket{001} \\
+\ket{010} &\mapsto \ket{010} \\
+\ket{011} &\mapsto \ket{011} \\
+\ket{100} &\mapsto \ket{100} \\
+\ket{101} &\mapsto \ket{101} \\
+\ket{110} &\mapsto \ket{111} \\
+\ket{111} &\mapsto \ket{110} 
+\end{aligned} & \hspace{36pt} &
+\begin{array}{c} \Qcircuit @C=1em @R=1.6em {
+	& \ctrl{1} & \qw \\
+	& \ctrl{1} & \qw \\
+	& \targ & \qw
+} \end{array} 
+\end{IEEEeqnarray*} 
 
 
 \section{Operator identities}
@@ -164,64 +242,43 @@ T^2 = S \qquad S^2 = Z
 & HZH = X \qquad && SZS^\dagger = Z
 \end{alignat*}
 
-\begin{equation*}
-\Qcircuit @C=1em @R=.7em {
+\begin{IEEEeqnarray*}{CCC}
+\begin{array}{c} \Qcircuit @C=1em @R=.7em {
 	& \gate{H} & \ctrl{2} & \gate{H} & \qw & & & \targ & \qw \\
-	& & & & & \push{\rule{.12em}{0em}=\rule{.12em}{0em}} 
-	& & & & & &
-	\push{\rule{0.12em}{0em}
-	(H \otimes H) \CNOT_{0,1} (H \otimes H) = \CNOT_{1,0}
-	} \\
+	& & & & & \push{\rule{.12em}{0em}=\rule{.12em}{0em}} \\
 	& \gate{H} & \targ & \gate{H} & \qw & & & \ctrl{-2} & \qw
-}
-\end{equation*} \\
-
-\begin{equation*}
-\Qcircuit @C=1em @R=.7em {
+} \end{array} & \hspace{36pt} &
+(H \otimes H) \CNOT_{0,1} (H \otimes H) = \CNOT_{1,0} \\[24pt]
+\begin{array}{c} \Qcircuit @C=1em @R=.7em {
 	& \gate{X} & \ctrl{2} & \qw & & & \ctrl{2} & \gate{X} & \qw  \\
-	& & & & \push{\rule{.12em}{0em}=\rule{.12em}{0em}} 
-	& & & & & & &
-	\push{\rule{0.12em}{0em}
-	(X \otimes I) \CNOT_{0,1} = \CNOT_{0,1} (X \otimes X)
-	} \\
+	& & & & \push{\rule{.12em}{0em}=\rule{.12em}{0em}} \\
 	& \qw & \targ & \qw & & & \targ & \gate{X} & \qw
-}
-\end{equation*} \\
-
-\begin{equation*}
-\Qcircuit @C=1em @R=.7em {
+} \end{array} & \hspace{36pt} &
+(X \otimes I) \CNOT_{0,1} = \CNOT_{0,1} (X \otimes X) \\[24pt]
+\begin{array}{c} \Qcircuit @C=1em @R=.7em {
 	& \qw & \ctrl{2} & \qw & & & \ctrl{2} & \qw & \qw  \\
-	& & & & \push{\rule{.12em}{0em}=\rule{.12em}{0em}} 
-	& & & & & & &
-	\push{\rule{0.12em}{0em}
-	(I \otimes X) \CNOT_{0,1} = \CNOT_{0,1}(I \otimes X)
-	} \\
+	& & & & \push{\rule{.12em}{0em}=\rule{.12em}{0em}} \\
 	& \gate{X} & \targ & \qw & & & \targ & \gate{X} & \qw
-}
-\end{equation*} \\
-
-\begin{equation*}
-\Qcircuit @C=1em @R=.7em {
+} \end{array} & \hspace{36pt} &
+(I \otimes X) \CNOT_{0,1} = \CNOT_{0,1}(I \otimes X) \\[24pt]
+\begin{array}{c} \Qcircuit @C=1em @R=.7em {
 	& \gate{Z} & \ctrl{2} & \qw & & & \ctrl{2} & \gate{Z} & \qw  \\
-	& & & & \push{\rule{.12em}{0em}=\rule{.12em}{0em}} 
-	& & & & & & &
-	\push{\rule{0.12em}{0em}
-	(Z \otimes I) \CNOT_{0,1} = \CNOT_{0,1} (Z \otimes I)
-	} \\
+	& & & & \push{\rule{.12em}{0em}=\rule{.12em}{0em}} \\
 	& \qw & \targ & \qw & & & \targ & \qw & \qw
-}
-\end{equation*} \\
-
-\begin{equation*}
-\Qcircuit @C=1em @R=.7em {
+} \end{array} & \hspace{36pt} &
+(Z \otimes I) \CNOT_{0,1} = \CNOT_{0,1} (Z \otimes I) \\[24pt]
+\begin{array}{c} \Qcircuit @C=1em @R=.7em {
 	& \qw & \ctrl{2} & \qw & & & \ctrl{2} & \gate{Z} & \qw  \\
-	& & & & \push{\rule{.12em}{0em}=\rule{.12em}{0em}} 
-	& & & & & & &
-	\push{\rule{0.12em}{0em}
-	(I \otimes Z) \CNOT_{0,1} = \CNOT_{0,1} (Z \otimes Z)
-	} \\
+	& & & & \push{\rule{.12em}{0em}=\rule{.12em}{0em}} \\
 	& \gate{Z} & \targ & \qw & & & \targ & \gate{Z} & \qw
-}
-\end{equation*} \\
+} \end{array} & \hspace{36pt} &
+(I \otimes Z) \CNOT_{0,1} = \CNOT_{0,1} (Z \otimes Z) \\[24pt]
+\begin{array}{c} \Qcircuit @C=1em @R=.7em {
+	& \qswap & \qw & & & \ctrl{2} & \targ & \ctrl{2} & \qw  \\
+	& \qwx & & \push{\rule{.12em}{0em}=\rule{.12em}{0em}} \\
+	& \qswap \qwx & \qw & & & \targ & \ctrl{-2} & \targ & \qw
+} \end{array} & \hspace{36pt} &
+\SWAP = \CNOT_{0,1} \CNOT_{1,0} \CNOT_{0,1} \\[24pt]
+\end{IEEEeqnarray*}
 
 \end{document}
