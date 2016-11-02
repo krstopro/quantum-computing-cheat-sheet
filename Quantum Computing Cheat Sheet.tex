@@ -292,9 +292,9 @@ T^2 = S \qquad S^2 = Z
 } \end{array} & \hspace{36pt} &
 \SWAP = \CNOT_{0,1} \CNOT_{1,0} \CNOT_{0,1} \\[24pt]
 \begin{array}{c} \Qcircuit @C=1em @R=.7em {
-	& \ctrl{2} & \qw & & & \qw & \ctrl{2} & \qw  \\
+	& \ctrl{2} & \qw & & & \qw & \ctrl{2} & \qw & \qw  \\
 	& & & \push{\rule{.12em}{0em}=\rule{.12em}{0em}} \\
-	& \gate{Y} & \qw & & & \gate{S^3} & \targ & \gate{S}
+	& \gate{Y} & \qw & & & \gate{S^3} & \targ & \gate{S} & \qw
 } \end{array} & \hspace{36pt} &
 \text{CY}_{0,1} = (I \otimes S) \CNOT_{0,1} (I \otimes S^3) \\[24pt]
 \end{IEEEeqnarray*}
