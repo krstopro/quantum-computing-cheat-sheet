@@ -1,4 +1,5 @@
 TODO list:
 
+- Add Bloch Sphere
 - Add more circuit identities
 - Add a section on density operators
