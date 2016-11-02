@@ -31,16 +31,16 @@
 \end{equation*}
 
 \begin{equation*}
-\ket{\psi} = \alpha \ket{0} + \beta \ket{1} = \begin{bmatrix} \alpha \\ \beta \end{bmatrix} ,
+\ket{\psi} = \alpha \ket{0} + \beta \ket{1} ,
 \quad
 |\alpha|^2 + |\beta|^2 = 1
 \end{equation*}
 
 \begin{equation*}
-\ket{+} = \frac{\ket{0} + \ket{1}}{\sqrt{2}} 
+\ket{+} = \frac{1}{\sqrt{2}} \big( \ket{0} + \ket{1} \big) 
 = \begin{bmatrix} \frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}} \end{bmatrix}
 \quad
-\ket{-} = \frac{\ket{0} - \ket{1}}{\sqrt{2}}
+\ket{-} = \frac{1}{\sqrt{2}} \big( \ket{0} - \ket{1} \big) 
 = \begin{bmatrix} \frac{1}{\sqrt{2}} \\ -\frac{1}{\sqrt{2}} \end{bmatrix}
 \end{equation*}
 
@@ -48,6 +48,13 @@
 \ket{\Phi^\pm} = \frac{1}{\sqrt{2}} \big( \ket{00} \pm \ket{11} \big)
 \quad
 \ket{\Psi^\pm} = \frac{1}{\sqrt{2}} \big( \ket{01} \pm \ket{10} \big)
+\end{equation*}
+
+\begin{equation*}
+\ket{\psi} = \cos{\frac{\theta}{2}} \ket{0} + e^{i\phi} \sin{\frac{\theta}{2}} \ket{1} ,
+\quad
+0 \le \theta \le \pi, \
+0 \le \phi < 2\pi
 \end{equation*}
 
 \section{Unitary Operators}
@@ -118,7 +125,7 @@ T & = & \begin{bmatrix} 1 & 0 \\ 0 & e^{i \pi / 4} \end{bmatrix} & \hspace{36pt}
 	& \gate{T} & \qw
 } \\[12pt]
 \CNOT_{0,1} & = & \begin{bmatrix} 1 & 0 & 0 & 0 \\ 
-                                         		      0 & 1 & 0 & 0 \\ 
+                                                        0 & 1 & 0 & 0 \\ 
                                           		      0 & 0 & 0 & 1 \\ 
                                            	      0 & 0 & 1 & 0
                   \end{bmatrix} & \hspace{36pt} &
