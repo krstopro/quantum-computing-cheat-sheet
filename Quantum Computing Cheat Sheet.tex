@@ -31,7 +31,7 @@
 \end{equation*}
 
 \begin{equation*}
-\ket{\psi} = \alpha \ket{0} + \beta \ket{1} ,
+\ket{\psi} = \alpha \ket{0} + \beta \ket{1} = \begin{bmatrix} \alpha \\ \beta \end{bmatrix} ,
 \quad
 |\alpha|^2 + |\beta|^2 = 1
 \end{equation*}
@@ -51,7 +51,7 @@
 \end{equation*}
 
 \begin{equation*}
-\ket{\psi} = \cos{\frac{\theta}{2}} \ket{0} + e^{i\phi} \sin{\frac{\theta}{2}} \ket{1} ,
+\ket{\psi} = \cos{\frac{\theta}{2}} \ket{0} + e^{i\phi} \sin{\frac{\theta}{2}} \ket{1} \, ,
 \quad
 0 \le \theta \le \pi, \
 0 \le \phi < 2\pi
@@ -125,7 +125,7 @@ T & = & \begin{bmatrix} 1 & 0 \\ 0 & e^{i \pi / 4} \end{bmatrix} & \hspace{36pt}
 	& \gate{T} & \qw
 } \\[12pt]
 \CNOT_{0,1} & = & \begin{bmatrix} 1 & 0 & 0 & 0 \\ 
-                                                        0 & 1 & 0 & 0 \\ 
+                                         		      0 & 1 & 0 & 0 \\ 
                                           		      0 & 0 & 0 & 1 \\ 
                                            	      0 & 0 & 1 & 0
                   \end{bmatrix} & \hspace{36pt} &
@@ -281,11 +281,29 @@ T^2 = S \qquad S^2 = Z
 } \end{array} & \hspace{36pt} &
 (I \otimes Z) \CNOT_{0,1} = \CNOT_{0,1} (Z \otimes Z) \\[24pt]
 \begin{array}{c} \Qcircuit @C=1em @R=.7em {
+	& \gate{Y} & \ctrl{2} & \qw & & & \ctrl{2} & \gate{Y} & \qw  \\
+	& & & & \push{\rule{.12em}{0em}=\rule{.12em}{0em}} \\
+	& \qw & \targ & \qw & & & \targ & \gate{X} & \qw
+} \end{array} & \hspace{36pt} &
+(Y \otimes I) \CNOT_{0,1} = \CNOT_{0,1} (Y \otimes X) \\[24pt]
+\begin{array}{c} \Qcircuit @C=1em @R=.7em {
+	& \qw & \ctrl{2} & \qw & & & \ctrl{2} & \gate{Z} & \qw  \\
+	& & & & \push{\rule{.12em}{0em}=\rule{.12em}{0em}} \\
+	& \gate{Y} & \targ & \qw & & & \targ & \gate{Y} & \qw
+} \end{array} & \hspace{36pt} &
+(I \otimes Y) \CNOT_{0,1} = \CNOT_{0,1} (Z \otimes Y) \\[24pt]
+\begin{array}{c} \Qcircuit @C=1em @R=.7em {
 	& \qswap & \qw & & & \ctrl{2} & \targ & \ctrl{2} & \qw  \\
 	& \qwx & & \push{\rule{.12em}{0em}=\rule{.12em}{0em}} \\
 	& \qswap \qwx & \qw & & & \targ & \ctrl{-2} & \targ & \qw
 } \end{array} & \hspace{36pt} &
 \SWAP = \CNOT_{0,1} \CNOT_{1,0} \CNOT_{0,1} \\[24pt]
+\begin{array}{c} \Qcircuit @C=1em @R=.7em {
+	& \ctrl{2} & \qw & & & \qw & \ctrl{2} & \qw & \qw  \\
+	& & & \push{\rule{.12em}{0em}=\rule{.12em}{0em}} \\
+	& \gate{Y} & \qw & & & \gate{S^3} & \targ & \gate{S} & \qw
+} \end{array} & \hspace{36pt} &
+\text{CY}_{0,1} = (I \otimes S) \CNOT_{0,1} (I \otimes S^3) \\[24pt]
 \end{IEEEeqnarray*}
 
 \end{document}
