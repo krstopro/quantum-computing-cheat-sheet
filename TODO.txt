@@ -1,5 +1,7 @@
 TODO list:
 
 - Add Bloch Sphere
+- Add identity H = 1/sqrt(2) (X + Z)
+- Add identity for rotations R_sigma(theta) = I*sin(theta) + i*sigma*cos(theta)
 - Add more circuit identities
 - Add a section on density operators
